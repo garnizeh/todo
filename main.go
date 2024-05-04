@@ -10,6 +10,21 @@ import (
 )
 
 func main() {
+	err := openDB()
+	if err != nil {
+		panic(err)
+	}
+	defer func() {
+		err := closeDB()
+		if err != nil {
+			panic(err)
+		}
+	}()
+	err = setupDB()
+	if err != nil {
+		panic(err)
+	}
+
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 	r.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
@@ -22,5 +37,6 @@ func main() {
 
 		tmpl.ExecuteTemplate(w, "Base", nil)
 	})
+
 	http.ListenAndServe("localhost:3000", r)
 }
