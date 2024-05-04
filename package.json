@@ -6,14 +6,20 @@
 	"type": "module",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "vite build --watch"
+		"dev": "concurrently \"vite build --watch\" \"tailwindcss -i ./src/index.css -o ./static/index.css --watch\""
 	},
 	"keywords": [],
-	"author": {"name": "garnizeH"},
+	"author": {
+		"name": "garnizeH"
+	},
 	"license": "MIT",
 	"devDependencies": {
+		"autoprefixer": "^10.4.19",
+		"concurrently": "^8.2.2",
+		"postcss": "^8.4.38",
 		"prettier": "^3.2.5",
 		"prettier-plugin-go-template": "^0.0.15",
+		"tailwindcss": "^3.4.3",
 		"vite": "^5.2.11"
 	},
 	"dependencies": {
